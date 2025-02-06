@@ -1,0 +1,23 @@
+.nav {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.navUl {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navLink {
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+}
+.navLink:hover {
+  color: crimson;
+}
+.active {
+  color: crimson;
+}

@@ -1,0 +1,33 @@
+.container {
+  padding: 20px;
+}
+
+.goBackButton {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.movieDetails {
+  display: flex;
+  gap: 20px;
+}
+
+.details {
+  flex: 1;
+}
+
+.additionalInfo {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.link {
+  color: blue;
+}
