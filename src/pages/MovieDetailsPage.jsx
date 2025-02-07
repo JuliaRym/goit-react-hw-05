@@ -9,6 +9,7 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const backLinkHref = location.state?.from || "/";
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +27,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div className={css.container}>
-      <Link to={location.state?.from || "/"} className={css.goBackButton}>
+      <Link to={backLinkHref} className={css.goBackButton}>
         Go back
       </Link>
 
