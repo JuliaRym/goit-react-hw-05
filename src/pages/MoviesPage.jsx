@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import MovieList from "../components/MovieList";
 import { searchMovies } from "../api/MoviesApi";
 import css from "./MoviesPage.module.css";
@@ -8,19 +9,37 @@ const MoviesPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
-  const handleSearch = () => {
-    if (query) {
+  useEffect(() => {
+    const queryFromUrl = searchParams.get("query") || "";
+    setQuery(queryFromUrl);
+    setSearchQuery(queryFromUrl);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (searchQuery) {
       setLoading(true);
-      searchMovies(query)
+      searchMovies(searchQuery)
         .then((data) => {
           setMovies(data);
           setLoading(false);
         })
         .catch((error) => {
           setError(error);
+        })
+        .finally(() => {
           setLoading(false);
         });
+    }
+  }, [searchQuery]);
+
+  const handleSearch = () => {
+    if (query.trim()) {
+      setSearchParams({ query });
+      setSearchQuery(query);
     }
   };
 
@@ -36,8 +55,9 @@ const MoviesPage = () => {
           Search
         </button>
       </div>
+      {loading && <p>Loading movies...</p>}
       {error && <p>Error loading movies!</p>}
-      <MovieList movies={movies} />
+      {searchQuery && <MovieList movies={movies} query={searchQuery} />}
     </div>
   );
 };
